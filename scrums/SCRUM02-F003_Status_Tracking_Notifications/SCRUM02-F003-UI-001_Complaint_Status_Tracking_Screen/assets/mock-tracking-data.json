@@ -1,0 +1,25 @@
+{
+  "referenceId": "CMP-202609-1001",
+  "status": "In Progress",
+  "category": "Electrical",
+  "history": [
+    {
+      "fromStatus": null,
+      "toStatus": "Open",
+      "timestamp": "2026-09-12T08:00:00Z",
+      "note": "Complaint submitted"
+    },
+    {
+      "fromStatus": "Open",
+      "toStatus": "Assigned",
+      "timestamp": "2026-09-12T08:30:00Z",
+      "note": "Assigned to Electrical Department"
+    },
+    {
+      "fromStatus": "Assigned",
+      "toStatus": "In Progress",
+      "timestamp": "2026-09-12T09:15:00Z",
+      "note": "Technician arrived with replacement parts"
+    }
+  ]
+}
