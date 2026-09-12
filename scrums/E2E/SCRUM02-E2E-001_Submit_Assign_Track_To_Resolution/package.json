@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-e2e-001-submit-assign-track-to-resolution",
+  "version": "1.0.0",
+  "description": "E2E Flow: Submit -> Assign -> Track -> Resolve (SCRUM02-E2E-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
