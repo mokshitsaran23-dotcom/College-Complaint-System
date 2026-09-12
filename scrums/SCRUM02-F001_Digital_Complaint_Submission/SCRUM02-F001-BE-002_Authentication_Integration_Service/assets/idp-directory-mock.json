@@ -1,0 +1,23 @@
+[
+  {
+    "collegeId": "STU101",
+    "name": "Jane Doe",
+    "email": "jane.doe@college.edu",
+    "role": "student",
+    "department": null
+  },
+  {
+    "collegeId": "ADM001",
+    "name": "Campus Director",
+    "email": "admin@college.edu",
+    "role": "admin",
+    "department": "Facilities"
+  },
+  {
+    "collegeId": "STF201",
+    "name": "Mike Tech",
+    "email": "mike.tech@college.edu",
+    "role": "staff",
+    "department": "Electrical"
+  }
+]
