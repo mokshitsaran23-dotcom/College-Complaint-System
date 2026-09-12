@@ -1,0 +1,11 @@
+{
+  "name": "scrum02-f001-ui-002-login-college-credentials",
+  "version": "1.0.0",
+  "description": "Login Component with College Credentials (SCRUM02-F001-UI-002)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1"
+  }
+}
