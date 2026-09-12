@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-e2e-002-resolved-feedback-feeds-reporting",
+  "version": "1.0.0",
+  "description": "E2E Flow: Resolved Complaint -> Feedback -> Admin Reporting (SCRUM02-E2E-002)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
