@@ -1,0 +1,10 @@
+# Schema Specification: Complaint
+- `referenceId` (String, unique, indexed)
+- `category` (String, enum: Electrical, Plumbing, IT Support, Carpentry, Sanitation, Other)
+- `description` (String)
+- `location` (String, required)
+- `photoUrls` (Array of Strings)
+- `status` (String, enum: Open, Assigned, In Progress, Resolved)
+- `submitter` (Object: collegeId, name, email)
+- `assignedDepartment` (String, nullable)
+- `timestamps` (createdAt, updatedAt)

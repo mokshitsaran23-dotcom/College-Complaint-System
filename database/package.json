@@ -1,0 +1,12 @@
+{
+  "name": "college-complaint-system-database",
+  "version": "1.0.0",
+  "description": "MongoDB & Mongoose schemas and seeding for College Complaint System",
+  "main": "connection.js",
+  "scripts": {
+    "seed": "node seed/seed.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.4.0"
+  }
+}

@@ -1,0 +1,12 @@
+# UI Specification: Complaint Submission Form
+- **Fields**:
+  - Category (Dropdown: Electrical, Plumbing, IT Support, Carpentry, Sanitation)
+  - Location (Building selection + Room / Landmark detail)
+  - Description (Textarea, min 10 chars)
+  - Attachment (File upload: JPG/PNG, preview with remove option)
+- **Validation Rules**:
+  - Category is required.
+  - Location is required.
+  - At least description OR photo must be provided.
+- **Success State**:
+  - Displays modal / alert box with Reference ID: `CMP-XXXX` and link to tracking screen.
