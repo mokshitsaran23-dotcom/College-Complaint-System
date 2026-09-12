@@ -1,0 +1,15 @@
+{
+  "student": {
+    "collegeId": "STU101",
+    "role": "student"
+  },
+  "admin": {
+    "collegeId": "ADM001",
+    "role": "admin"
+  },
+  "staff": {
+    "collegeId": "STF201",
+    "role": "staff",
+    "department": "Electrical"
+  }
+}

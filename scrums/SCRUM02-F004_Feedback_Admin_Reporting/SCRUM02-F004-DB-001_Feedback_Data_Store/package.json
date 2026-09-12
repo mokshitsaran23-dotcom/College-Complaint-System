@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f004-db-001-feedback-data-store",
+  "version": "1.0.0",
+  "description": "Feedback Data Store Mongoose Schema (SCRUM02-F004-DB-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}

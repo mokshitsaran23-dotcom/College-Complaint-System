@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f001-be-001-complaint-creation-api",
+  "version": "1.0.0",
+  "description": "Complaint Creation REST API (SCRUM02-F001-BE-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}

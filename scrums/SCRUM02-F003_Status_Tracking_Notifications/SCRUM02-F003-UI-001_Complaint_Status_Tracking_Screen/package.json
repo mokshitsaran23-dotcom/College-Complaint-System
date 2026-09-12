@@ -1,0 +1,11 @@
+{
+  "name": "scrum02-f003-ui-001-complaint-status-tracking-screen",
+  "version": "1.0.0",
+  "description": "Complaint Status Tracking Screen (SCRUM02-F003-UI-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1"
+  }
+}

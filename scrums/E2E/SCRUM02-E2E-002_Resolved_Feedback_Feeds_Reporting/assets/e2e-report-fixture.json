@@ -1,0 +1,16 @@
+{
+  "initialComplaints": [
+    {
+      "id": "c1",
+      "category": "Electrical",
+      "status": "Resolved",
+      "rating": 5
+    },
+    {
+      "id": "c2",
+      "category": "Plumbing",
+      "status": "Resolved",
+      "rating": 4
+    }
+  ]
+}

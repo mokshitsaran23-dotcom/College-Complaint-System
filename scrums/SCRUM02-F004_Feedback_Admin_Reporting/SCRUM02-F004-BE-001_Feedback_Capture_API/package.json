@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f004-be-001-feedback-capture-api",
+  "version": "1.0.0",
+  "description": "Feedback Capture REST API (SCRUM02-F004-BE-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "complaintId": "cmp_100",
+  "fromStatus": "Assigned",
+  "toStatus": "In Progress",
+  "changedBy": "STF201",
+  "changedByRole": "staff",
+  "note": "Spare parts collected from inventory",
+  "timestamp": "2026-09-12T11:15:00.000Z"
+}
