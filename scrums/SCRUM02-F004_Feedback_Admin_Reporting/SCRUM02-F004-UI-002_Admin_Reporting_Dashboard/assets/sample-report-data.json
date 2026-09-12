@@ -1,0 +1,20 @@
+{
+  "totalComplaints": 25,
+  "resolvedCount": 20,
+  "averageRating": 4.8,
+  "byCategory": {
+    "Electrical": 12,
+    "Plumbing": 8,
+    "IT Support": 5
+  },
+  "byLocation": [
+    {
+      "location": "Science Block",
+      "count": 10
+    },
+    {
+      "location": "Hostel B",
+      "count": 7
+    }
+  ]
+}
