@@ -1,0 +1,11 @@
+{
+  "name": "scrum02-f002-ui-001-admin-complaint-queue-assignment",
+  "version": "1.0.0",
+  "description": "Admin Complaint Queue & Department Assignment Screen (SCRUM02-F002-UI-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1"
+  }
+}
