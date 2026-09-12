@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f003-be-001-status-update-notification-service",
+  "version": "1.0.0",
+  "description": "Status Update & Real-Time Notification Trigger Service (SCRUM02-F003-BE-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
