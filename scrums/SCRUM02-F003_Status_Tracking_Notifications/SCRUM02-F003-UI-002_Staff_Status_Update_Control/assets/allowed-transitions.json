@@ -1,0 +1,11 @@
+{
+  "Open": [
+    "Assigned"
+  ],
+  "Assigned": [
+    "In Progress"
+  ],
+  "In Progress": [
+    "Resolved"
+  ]
+}

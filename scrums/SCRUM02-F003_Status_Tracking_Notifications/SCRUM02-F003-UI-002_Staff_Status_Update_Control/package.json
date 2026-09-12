@@ -1,0 +1,11 @@
+{
+  "name": "scrum02-f003-ui-002-staff-status-update-control",
+  "version": "1.0.0",
+  "description": "Staff Status Update Control (SCRUM02-F003-UI-002)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1"
+  }
+}
