@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f004-be-002-reporting-aggregation-api",
+  "version": "1.0.0",
+  "description": "Reporting Aggregation REST API (SCRUM02-F004-BE-002)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
