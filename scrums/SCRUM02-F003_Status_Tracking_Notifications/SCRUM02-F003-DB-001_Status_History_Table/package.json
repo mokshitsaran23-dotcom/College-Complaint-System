@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f003-db-001-status-history-table",
+  "version": "1.0.0",
+  "description": "Complaint Status History Table Schema (SCRUM02-F003-DB-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
