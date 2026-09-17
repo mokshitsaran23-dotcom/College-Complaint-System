@@ -1,0 +1,11 @@
+{
+  "name": "scrum02-f004-ui-001-post-resolution-feedback-form",
+  "version": "1.0.0",
+  "description": "Post-Resolution Feedback Form (SCRUM02-F004-UI-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1"
+  }
+}
