@@ -1,0 +1,11 @@
+{
+  "name": "scrum02-f004-ui-002-admin-reporting-dashboard",
+  "version": "1.0.0",
+  "description": "Admin Reporting Dashboard (SCRUM02-F004-UI-002)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1"
+  }
+}
