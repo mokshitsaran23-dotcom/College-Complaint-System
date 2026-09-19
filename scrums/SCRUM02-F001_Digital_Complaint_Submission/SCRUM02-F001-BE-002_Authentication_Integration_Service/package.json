@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f001-be-002-authentication-integration-service",
+  "version": "1.0.0",
+  "description": "Institutional SSO / LDAP Auth Integration Service (SCRUM02-F001-BE-002)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
