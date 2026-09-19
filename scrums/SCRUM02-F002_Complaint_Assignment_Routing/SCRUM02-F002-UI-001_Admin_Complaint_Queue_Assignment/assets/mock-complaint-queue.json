@@ -1,0 +1,18 @@
+[
+  {
+    "id": "c1",
+    "referenceId": "CMP-202609-1001",
+    "category": "Electrical",
+    "location": "Lab 304",
+    "status": "Open",
+    "assignedDepartment": null
+  },
+  {
+    "id": "c2",
+    "referenceId": "CMP-202609-1002",
+    "category": "Plumbing",
+    "location": "Hostel B",
+    "status": "Open",
+    "assignedDepartment": null
+  }
+]
