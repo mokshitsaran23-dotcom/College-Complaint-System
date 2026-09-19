@@ -1,0 +1,11 @@
+{
+  "name": "scrum02-f001-db-001-complaint-data-store",
+  "version": "1.0.0",
+  "description": "Complaint Data Store Mongoose Schema (SCRUM02-F001-DB-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.4.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "referenceId": "CMP-202609-1001",
+  "category": "Plumbing",
+  "location": "Hostel Block C, 2nd Floor Washroom",
+  "description": "Severe water tap leakage causing flooding",
+  "photoUrls": [
+    "https://cdn.college.edu/photos/tap-leak.jpg"
+  ],
+  "status": "Open",
+  "submitter": {
+    "collegeId": "STU101",
+    "name": "Jane Doe"
+  }
+}
