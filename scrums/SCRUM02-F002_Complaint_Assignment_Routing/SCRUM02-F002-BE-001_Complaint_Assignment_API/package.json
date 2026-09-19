@@ -1,0 +1,8 @@
+{
+  "name": "scrum02-f002-be-001-complaint-assignment-api",
+  "version": "1.0.0",
+  "description": "Complaint Assignment REST API (SCRUM02-F002-BE-001)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
