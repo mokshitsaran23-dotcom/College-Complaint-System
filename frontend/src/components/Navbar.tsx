@@ -99,7 +99,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
-                  Assigned Work Orders ({user.department})
+                  Supervisor Queue ({user.department})
+                </button>
+              )}
+
+              {user.role === 'worker' && (
+                <button
+                  onClick={() => setActiveTab('worker_queue')}
+                  className={`px-3 py-1.5 text-sm font-semibold rounded-lg transition-all ${
+                    activeTab === 'worker_queue'
+                      ? 'bg-amber-600 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-amber-50'
+                  }`}
+                >
+                  👷 Worker Tasks ({user.department})
                 </button>
               )}
             </div>

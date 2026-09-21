@@ -8,7 +8,7 @@ interface TimelineProps {
 }
 
 export const Timeline: React.FC<TimelineProps> = ({ currentStatus, history, createdAt }) => {
-  const stages: ComplaintStatus[] = ['Open', 'Assigned', 'In Progress', 'Resolved'];
+  const stages: ComplaintStatus[] = ['Open', 'Assigned', 'In Progress', 'Pending Approval', 'Resolved'];
   const currentIndex = stages.indexOf(currentStatus);
 
   return (

@@ -65,7 +65,7 @@ async function getComplaints(req, res) {
   // RBAC scoping
   if (user.role === 'student') {
     results = results.filter(c => c.submitter.collegeId === user.collegeId);
-  } else if (user.role === 'staff') {
+  } else if (user.role === 'staff' || user.role === 'worker') {
     if (user.department) {
       results = results.filter(c => c.assignedDepartment === user.department);
     }

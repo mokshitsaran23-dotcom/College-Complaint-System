@@ -12,7 +12,7 @@ async function getSummaryReport(req, res) {
   }
 
   const byCategory = {};
-  const byStatus = { 'Open': 0, 'Assigned': 0, 'In Progress': 0, 'Resolved': 0 };
+  const byStatus = { 'Open': 0, 'Assigned': 0, 'In Progress': 0, 'Pending Approval': 0, 'Resolved': 0 };
   const byDepartment = {};
   const locationCounts = {};
 

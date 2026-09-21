@@ -94,8 +94,10 @@ export const api = {
       let dept = null;
       let name = 'Student User';
       if (u.startsWith('ADM')) { role = 'admin'; dept = 'Administration'; name = 'Campus Administrator'; }
-      else if (u === 'STF201') { role = 'staff'; dept = 'Electrical'; name = 'Mike Sparks (Lead Electrician)'; }
-      else if (u === 'STF202') { role = 'staff'; dept = 'Plumbing'; name = 'Dave Plumber'; }
+      else if (u === 'WRK301') { role = 'worker'; dept = 'Electrical'; name = 'Bob Worker (Electrical Crew)'; }
+      else if (u === 'WRK302') { role = 'worker'; dept = 'Plumbing'; name = 'Charlie Worker (Plumbing Crew)'; }
+      else if (u === 'STF201') { role = 'staff'; dept = 'Electrical'; name = 'Mike Sparks (Staff Supervisor)'; }
+      else if (u === 'STF202') { role = 'staff'; dept = 'Plumbing'; name = 'Dave Plumber (Staff Supervisor)'; }
       else if (u === 'STF203') { role = 'staff'; dept = 'IT Support'; name = 'Sarah Byte (IT Tech)'; }
       else { name = 'Jane Doe'; }
 
@@ -133,7 +135,8 @@ export const api = {
         history: [
           { toStatus: 'Open', timestamp: complaint.createdAt, note: 'Digitally submitted' },
           ...(complaint.assignedAt ? [{ toStatus: 'Assigned', timestamp: complaint.assignedAt, note: `Assigned to ${complaint.assignedDepartment}` }] : []),
-          ...(complaint.resolvedAt ? [{ toStatus: 'Resolved', timestamp: complaint.resolvedAt, note: 'Resolved by assigned technician' }] : [])
+          ...(complaint.pendingApprovalAt ? [{ toStatus: 'Pending Approval', timestamp: complaint.pendingApprovalAt, note: 'Work completed, pending Admin approval' }] : []),
+          ...(complaint.resolvedAt ? [{ toStatus: 'Resolved', timestamp: complaint.resolvedAt, note: 'Resolution approved by Admin' }] : [])
         ],
         feedback: complaint.feedback || null
       };
@@ -189,12 +192,12 @@ export const api = {
     }
   },
 
-  async updateStatus(id: string, status: string, note?: string): Promise<Complaint> {
+  async updateStatus(id: string, status: string, note?: string, completionPhotoUrl?: string, completionNotes?: string): Promise<Complaint> {
     try {
       const res = await fetch(`${API_BASE}/complaints/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
-        body: JSON.stringify({ status, note })
+        body: JSON.stringify({ status, note, completionPhotoUrl, completionNotes })
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
@@ -203,7 +206,14 @@ export const api = {
       const item = localComplaints.find(c => c.id === id || c.referenceId === id);
       if (item) {
         item.status = status as any;
-        if (status === 'Resolved') item.resolvedAt = new Date().toISOString();
+        if (completionPhotoUrl) item.completionPhotoUrl = completionPhotoUrl;
+        if (completionNotes) item.completionNotes = completionNotes;
+        if (status === 'Pending Approval') {
+          item.pendingApprovalAt = new Date().toISOString();
+        }
+        if (status === 'Resolved') {
+          item.resolvedAt = new Date().toISOString();
+        }
       }
       return item!;
     }
@@ -252,6 +262,7 @@ export const api = {
           'Open': localComplaints.filter(c => c.status === 'Open').length,
           'Assigned': localComplaints.filter(c => c.status === 'Assigned').length,
           'In Progress': localComplaints.filter(c => c.status === 'In Progress').length,
+          'Pending Approval': localComplaints.filter(c => c.status === 'Pending Approval').length,
           'Resolved': localComplaints.filter(c => c.status === 'Resolved').length
         },
         byCategory: {

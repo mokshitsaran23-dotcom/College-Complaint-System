@@ -32,4 +32,12 @@ describe('Backend Core Services & Logic Tests', () => {
     assert.ok(store.statusHistory.length >= 4);
     assert.ok(store.feedbacks.length >= 1);
   });
+
+  test('IdP authenticates worker WRK301 with role worker', async () => {
+    const worker = await idpService.authenticate('WRK301', 'worker123');
+    assert.ok(worker);
+    assert.strictEqual(worker.collegeId, 'WRK301');
+    assert.strictEqual(worker.role, 'worker');
+    assert.strictEqual(worker.department, 'Electrical');
+  });
 });

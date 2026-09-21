@@ -4,26 +4,50 @@ const { notifySubmitterStatusUpdate } = require('../services/notificationService
 const validTransitions = {
   'Open': ['Assigned'],
   'Assigned': ['In Progress'],
-  'In Progress': ['Resolved'],
+  'In Progress': ['Pending Approval'],
+  'Pending Approval': ['Resolved', 'In Progress'],
   'Resolved': [] // Terminal state
 };
 
 async function updateStatus(req, res) {
   const user = req.user;
   const { id } = req.params;
-  const { status: targetStatus, note } = req.body || {};
+  const { status: targetStatus, note, completionPhotoUrl, completionNotes } = req.body || {};
 
   const complaint = store.complaints.find(c => c.id === id || c.referenceId === id);
   if (!complaint) {
     return res.status(404).json({ success: false, error: 'Complaint not found.' });
   }
 
-  // RBAC check: staff can only update complaints assigned to their department
-  if (user.role === 'staff' && user.department && complaint.assignedDepartment !== user.department) {
+  // RBAC check: staff/worker can only update complaints assigned to their department
+  if ((user.role === 'staff' || user.role === 'worker') && user.department && complaint.assignedDepartment !== user.department) {
     return res.status(403).json({
       success: false,
       error: `Forbidden: You can only update tickets assigned to ${user.department}.`
     });
+  }
+
+  // Worker cannot mark as Resolved directly!
+  if (targetStatus === 'Resolved' && user.role === 'worker') {
+    return res.status(403).json({
+      success: false,
+      error: 'Forbidden: Workers cannot mark complaints as Resolved directly. Work must be submitted for Admin approval.'
+    });
+  }
+
+  // Moving to Pending Approval REQUIRES completion photo proof from worker
+  if (targetStatus === 'Pending Approval') {
+    const photoToSave = completionPhotoUrl || req.body?.photoUrl;
+    if (!photoToSave && !complaint.completionPhotoUrl) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed: Photographic proof of completed work is required before requesting Admin approval.'
+      });
+    }
+    if (photoToSave) complaint.completionPhotoUrl = photoToSave;
+    if (completionNotes) complaint.completionNotes = completionNotes;
+    complaint.pendingApprovalAt = new Date().toISOString();
+    complaint.pendingApprovalBy = user.collegeId;
   }
 
   // Validate state machine lifecycle

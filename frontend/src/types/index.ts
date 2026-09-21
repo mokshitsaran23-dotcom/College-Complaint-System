@@ -1,8 +1,8 @@
-export type Role = 'student' | 'staff' | 'admin';
+export type Role = 'student' | 'worker' | 'staff' | 'admin';
 
 export type Department = 'Electrical' | 'Plumbing' | 'IT Support' | 'Carpentry' | 'Facilities' | 'Sanitation';
 
-export type ComplaintStatus = 'Open' | 'Assigned' | 'In Progress' | 'Resolved';
+export type ComplaintStatus = 'Open' | 'Assigned' | 'In Progress' | 'Pending Approval' | 'Resolved';
 
 export interface User {
   collegeId: string;
@@ -20,6 +20,8 @@ export interface Complaint {
   description: string;
   location: string;
   photoUrls?: string[];
+  completionPhotoUrl?: string;
+  completionNotes?: string;
   status: ComplaintStatus;
   submitter: {
     collegeId: string;
@@ -29,6 +31,8 @@ export interface Complaint {
   assignedDepartment?: Department | null;
   assignedAt?: string;
   assignedBy?: string;
+  pendingApprovalAt?: string;
+  pendingApprovalBy?: string;
   resolvedAt?: string;
   resolvedBy?: string;
   createdAt: string;

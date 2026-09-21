@@ -99,32 +99,32 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
               onClick={() => setDemoPersona('STU101', 'student123')}
               className="p-2 border border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left font-medium transition"
             >
-              🎓 <span className="font-bold text-slate-800">Student</span>
+              🎓 <span className="font-bold text-slate-800">Student Login</span>
               <div className="text-[10px] text-slate-400">STU101</div>
             </button>
             <button
               type="button"
-              onClick={() => setDemoPersona('ADM001', 'admin123')}
-              className="p-2 border border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left font-medium transition"
+              onClick={() => setDemoPersona('WRK301', 'worker123')}
+              className="p-2 border border-amber-200 bg-amber-50/50 hover:border-amber-500 hover:bg-amber-100/50 text-left font-medium transition"
             >
-              🛡️ <span className="font-bold text-slate-800">Admin</span>
-              <div className="text-[10px] text-slate-400">ADM001</div>
+              👷 <span className="font-bold text-slate-800">Worker Login</span>
+              <div className="text-[10px] text-amber-700">WRK301 (Electrical)</div>
             </button>
             <button
               type="button"
               onClick={() => setDemoPersona('STF201', 'staff123')}
               className="p-2 border border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left font-medium transition"
             >
-              ⚡ <span className="font-bold text-slate-800">Staff (Elec)</span>
-              <div className="text-[10px] text-slate-400">STF201</div>
+              ⚡ <span className="font-bold text-slate-800">Staff Login</span>
+              <div className="text-[10px] text-slate-400">STF201 (Supervisor)</div>
             </button>
             <button
               type="button"
-              onClick={() => setDemoPersona('STF202', 'staff123')}
+              onClick={() => setDemoPersona('ADM001', 'admin123')}
               className="p-2 border border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left font-medium transition"
             >
-              🔧 <span className="font-bold text-slate-800">Staff (Plumb)</span>
-              <div className="text-[10px] text-slate-400">STF202</div>
+              🛡️ <span className="font-bold text-slate-800">Admin Login</span>
+              <div className="text-[10px] text-slate-400">ADM001 (Director)</div>
             </button>
           </div>
         </div>

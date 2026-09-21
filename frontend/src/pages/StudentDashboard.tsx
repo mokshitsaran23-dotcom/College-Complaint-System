@@ -353,15 +353,29 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
               </button>
             </div>
 
-            {selectedComplaint.photoUrls && selectedComplaint.photoUrls.length > 0 && (
-              <div className="mb-4">
-                <img
-                  src={selectedComplaint.photoUrls[0]}
-                  alt="Issue"
-                  className="w-full h-44 object-cover rounded-xl border border-slate-100 shadow-inner"
-                />
-              </div>
-            )}
+            {/* Photos Display: Initial Defect vs Worker Completion Proof */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+              {selectedComplaint.photoUrls && selectedComplaint.photoUrls.length > 0 && (
+                <div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Reported Defect Photo</span>
+                  <img
+                    src={selectedComplaint.photoUrls[0]}
+                    alt="Original Issue"
+                    className="w-full h-36 object-cover rounded-xl border border-slate-100 shadow-inner"
+                  />
+                </div>
+              )}
+              {selectedComplaint.completionPhotoUrl && (
+                <div>
+                  <span className="text-[10px] font-bold text-emerald-700 uppercase block mb-1">Worker Completion Proof</span>
+                  <img
+                    src={selectedComplaint.completionPhotoUrl}
+                    alt="Worker Completion Proof"
+                    className="w-full h-36 object-cover rounded-xl border-2 border-emerald-400 shadow-inner"
+                  />
+                </div>
+              )}
+            </div>
 
             <Timeline
               currentStatus={selectedComplaint.status}
@@ -392,17 +406,32 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
                       }
                     ]
                   : []),
-                ...(selectedComplaint.resolvedAt
+                ...(selectedComplaint.pendingApprovalAt
                   ? [
                       {
                         id: 'h3',
                         complaintId: selectedComplaint.id,
                         referenceId: selectedComplaint.referenceId,
                         fromStatus: 'In Progress' as any,
+                        toStatus: 'Pending Approval' as any,
+                        changedBy: selectedComplaint.pendingApprovalBy || 'Worker Crew',
+                        changedByRole: 'worker' as any,
+                        note: selectedComplaint.completionNotes || 'Work finished with photo proof. Submitted for Admin verification.',
+                        timestamp: selectedComplaint.pendingApprovalAt
+                      }
+                    ]
+                  : []),
+                ...(selectedComplaint.resolvedAt
+                  ? [
+                      {
+                        id: 'h4',
+                        complaintId: selectedComplaint.id,
+                        referenceId: selectedComplaint.referenceId,
+                        fromStatus: 'Pending Approval' as any,
                         toStatus: 'Resolved' as any,
-                        changedBy: selectedComplaint.resolvedBy || 'Technician',
-                        changedByRole: 'staff' as any,
-                        note: 'Issue verified and resolved successfully',
+                        changedBy: selectedComplaint.resolvedBy || 'Admin Director',
+                        changedByRole: 'admin' as any,
+                        note: 'Issue verified by Admin and resolved successfully',
                         timestamp: selectedComplaint.resolvedAt
                       }
                     ]

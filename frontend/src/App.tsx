@@ -6,6 +6,7 @@ import { LoginPage } from './pages/LoginPage';
 import { StudentDashboard } from './pages/StudentDashboard';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { StaffDashboard } from './pages/StaffDashboard';
+import { WorkerDashboard } from './pages/WorkerDashboard';
 import { api } from './services/api';
 import { subscribeToUserNotifications } from './services/socket';
 
@@ -27,6 +28,7 @@ export const App: React.FC = () => {
     if (user.role === 'student') setActiveTab('my_complaints');
     else if (user.role === 'admin') setActiveTab('queue');
     else if (user.role === 'staff') setActiveTab('staff_queue');
+    else if (user.role === 'worker') setActiveTab('worker_queue');
   }, [user?.role]);
 
   // Load complaints and reports
@@ -144,6 +146,14 @@ export const App: React.FC = () => {
 
             {user.role === 'staff' && (
               <StaffDashboard
+                user={user}
+                complaints={complaints}
+                onComplaintUpdated={handleComplaintUpdated}
+              />
+            )}
+
+            {user.role === 'worker' && (
+              <WorkerDashboard
                 user={user}
                 complaints={complaints}
                 onComplaintUpdated={handleComplaintUpdated}

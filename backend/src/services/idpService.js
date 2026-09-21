@@ -35,7 +35,7 @@ const demoCollegeDirectory = [
   {
     collegeId: 'STF201',
     password: 'staff123',
-    name: 'Mike Sparks (Lead Electrician)',
+    name: 'Mike Sparks (Staff Supervisor)',
     email: 'mike.sparks@college.edu',
     role: 'staff',
     department: 'Electrical',
@@ -44,11 +44,29 @@ const demoCollegeDirectory = [
   {
     collegeId: 'STF202',
     password: 'staff123',
-    name: 'Dave Plumber',
+    name: 'Dave Plumber (Staff Supervisor)',
     email: 'dave.plumber@college.edu',
     role: 'staff',
     department: 'Plumbing',
     avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150'
+  },
+  {
+    collegeId: 'WRK301',
+    password: 'worker123',
+    name: 'Bob Worker (Electrical Crew)',
+    email: 'bob.worker@college.edu',
+    role: 'worker',
+    department: 'Electrical',
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150'
+  },
+  {
+    collegeId: 'WRK302',
+    password: 'worker123',
+    name: 'Charlie Worker (Plumbing Crew)',
+    email: 'charlie.worker@college.edu',
+    role: 'worker',
+    department: 'Plumbing',
+    avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150'
   },
   {
     collegeId: 'STF203',
