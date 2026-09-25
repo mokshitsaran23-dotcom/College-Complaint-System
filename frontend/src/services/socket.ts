@@ -1,4 +1,5 @@
 import { io, Socket } from 'socket.io-client';
+import { User } from '../types';
 
 let socket: Socket | null = null;
 
@@ -7,8 +8,8 @@ export function getSocket(): Socket | null {
     try {
       socket = io('http://localhost:5000', {
         transports: ['websocket', 'polling'],
-        reconnectionAttempts: 3,
-        timeout: 2000
+        reconnectionAttempts: 5,
+        timeout: 3000
       });
 
       socket.on('connect', () => {
@@ -16,24 +17,43 @@ export function getSocket(): Socket | null {
       });
 
       socket.on('connect_error', (err) => {
-        console.warn('[Socket] Connection error (using in-app local event bus):', err.message);
+        console.warn('[Socket] Real-time connection error:', err.message);
       });
     } catch (e) {
-      console.warn('[Socket] Init failed, running in fallback mode');
+      console.warn('[Socket] Socket init failed');
     }
   }
   return socket;
 }
 
-export function subscribeToUserNotifications(collegeId: string, callback: (event: any) => void) {
+export function subscribeToUserNotifications(user: User, callback: (event: any) => void) {
   const s = getSocket();
-  if (s) {
-    s.emit('join_user_room', collegeId);
-    s.on('complaint:status_updated', callback);
-  }
-  return () => {
-    if (s) {
-      s.off('complaint:status_updated', callback);
+  if (s && user) {
+    s.emit('join_user_room', user.collegeId);
+    if (user.role) {
+      s.emit('join_role_room', user.role);
     }
-  };
+    if (user.department) {
+      s.emit('join_dept_room', user.department);
+    }
+
+    const events = [
+      'notification:new',
+      'complaint:status_updated',
+      'complaint:created',
+      'complaint:assigned',
+      'complaint:work_completed',
+      'complaint:resolved',
+      'complaint:rework_required',
+      'global:complaint_event'
+    ];
+
+    events.forEach(ev => s.on(ev, callback));
+
+    return () => {
+      events.forEach(ev => s.off(ev, callback));
+    };
+  }
+
+  return () => {};
 }

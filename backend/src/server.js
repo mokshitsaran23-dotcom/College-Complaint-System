@@ -76,6 +76,9 @@ if (require.main === module) {
     console.log(`⚡ WebSocket: Real-time Socket.io active`);
     console.log(`🔐 Auth: Institutional LDAP/SSO adapter ready`);
     await connectDB();
+    const { seedDefaultAccounts } = require('./services/authService');
+    await seedDefaultAccounts();
+    console.log(`🛡️ Auth: Multi-role DB authentication & predefined Admin ready`);
     console.log(`===================================================`);
   });
 }

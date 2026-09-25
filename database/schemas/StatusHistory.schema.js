@@ -26,12 +26,24 @@ const StatusHistorySchema = new mongoose.Schema({
   },
   changedByRole: {
     type: String,
-    enum: ['student', 'staff', 'admin'],
+    enum: ['student', 'staff', 'worker', 'admin'],
     required: true
+  },
+  action: {
+    type: String,
+    default: ''
   },
   note: {
     type: String,
     default: ''
+  },
+  proofPhotoUrl: {
+    type: String,
+    default: null
+  },
+  reworkReason: {
+    type: String,
+    default: null
   },
   timestamp: {
     type: Date,
