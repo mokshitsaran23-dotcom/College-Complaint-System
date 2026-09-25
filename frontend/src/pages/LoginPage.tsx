@@ -696,6 +696,53 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                 )}
               </button>
             </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 transition-all hover:shadow-lg disabled:opacity-50"
+          >
+            {loading ? 'Authenticating...' : 'Sign In with SSO'}
+          </button>
+        </form>
+
+        {/* Demo Persona Quick-Fill */}
+        <div className="mt-8 pt-6 border-t border-slate-100">
+          <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider text-center mb-3">
+            Quick Persona Switcher (For Evaluation)
+          </span>
+          <div className="grid grid-cols-2 gap-2 text-[11px]">
+            <button
+              type="button"
+              onClick={() => setDemoPersona('STU101', 'student123')}
+              className="p-2 border border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left font-medium transition"
+            >
+              🎓 <span className="font-bold text-slate-800">Student Login</span>
+              <div className="text-[10px] text-slate-400">STU101</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setDemoPersona('WRK301', 'worker123')}
+              className="p-2 border border-amber-200 bg-amber-50/50 hover:border-amber-500 hover:bg-amber-100/50 text-left font-medium transition"
+            >
+              👷 <span className="font-bold text-slate-800">Worker Login</span>
+              <div className="text-[10px] text-amber-700">WRK301 (Electrical)</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setDemoPersona('STF201', 'staff123')}
+              className="p-2 border border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left font-medium transition"
+            >
+              ⚡ <span className="font-bold text-slate-800">Staff Login</span>
+              <div className="text-[10px] text-slate-400">STF201 (Supervisor)</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setDemoPersona('ADM001', 'admin123')}
+              className="p-2 border border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left font-medium transition"
+            >
+              🛡️ <span className="font-bold text-slate-800">Admin Login</span>
+              <div className="text-[10px] text-slate-400">ADM001 (Director)</div>
+            </button>
           </div>
         )}
       </div>

@@ -14,6 +14,7 @@ export type ComplaintStatus =
   // Legacy aliases
   | 'Open'
   | 'Pending Approval';
+export type ComplaintStatus = 'Open' | 'Assigned' | 'In Progress' | 'Pending Approval' | 'Resolved';
 
 export interface User {
   collegeId: string;
@@ -76,6 +77,8 @@ export interface Complaint {
   reworkReason?: string;
   reworkRequestedAt?: string;
   reworkRequestedBy?: string;
+  pendingApprovalAt?: string;
+  pendingApprovalBy?: string;
   resolvedAt?: string;
   resolvedBy?: string;
   proofHistory?: ProofSubmission[];

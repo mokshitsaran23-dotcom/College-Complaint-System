@@ -84,6 +84,13 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'md' })
     },
     'RESOLVED': {
       label: 'Resolved',
+    'Pending Approval': {
+      bg: 'bg-amber-100',
+      text: 'text-amber-800',
+      dot: 'bg-amber-600 animate-ping',
+      border: 'border-amber-300'
+    },
+    'Resolved': {
       bg: 'bg-emerald-50',
       text: 'text-emerald-700',
       dot: 'bg-emerald-500',

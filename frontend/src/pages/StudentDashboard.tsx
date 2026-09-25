@@ -595,6 +595,95 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
                     {selectedComplaint.feedback ? '★ View Rating' : '★ Rate Resolution'}
                   </button>
                 )}
+            {/* Photos Display: Initial Defect vs Worker Completion Proof */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+              {selectedComplaint.photoUrls && selectedComplaint.photoUrls.length > 0 && (
+                <div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Reported Defect Photo</span>
+                  <img
+                    src={selectedComplaint.photoUrls[0]}
+                    alt="Original Issue"
+                    className="w-full h-36 object-cover rounded-xl border border-slate-100 shadow-inner"
+                  />
+                </div>
+              )}
+              {selectedComplaint.completionPhotoUrl && (
+                <div>
+                  <span className="text-[10px] font-bold text-emerald-700 uppercase block mb-1">Worker Completion Proof</span>
+                  <img
+                    src={selectedComplaint.completionPhotoUrl}
+                    alt="Worker Completion Proof"
+                    className="w-full h-36 object-cover rounded-xl border-2 border-emerald-400 shadow-inner"
+                  />
+                </div>
+              )}
+            </div>
+
+            <Timeline
+              currentStatus={selectedComplaint.status}
+              history={[
+                {
+                  id: 'h1',
+                  complaintId: selectedComplaint.id,
+                  referenceId: selectedComplaint.referenceId,
+                  fromStatus: null,
+                  toStatus: 'Open',
+                  changedBy: selectedComplaint.submitter.collegeId,
+                  changedByRole: 'student',
+                  note: 'Digitally submitted with details',
+                  timestamp: selectedComplaint.createdAt
+                },
+                ...(selectedComplaint.assignedAt
+                  ? [
+                      {
+                        id: 'h2',
+                        complaintId: selectedComplaint.id,
+                        referenceId: selectedComplaint.referenceId,
+                        fromStatus: 'Open' as any,
+                        toStatus: 'Assigned' as any,
+                        changedBy: selectedComplaint.assignedBy || 'Admin',
+                        changedByRole: 'admin' as any,
+                        note: `Routed to ${selectedComplaint.assignedDepartment} Department`,
+                        timestamp: selectedComplaint.assignedAt
+                      }
+                    ]
+                  : []),
+                ...(selectedComplaint.pendingApprovalAt
+                  ? [
+                      {
+                        id: 'h3',
+                        complaintId: selectedComplaint.id,
+                        referenceId: selectedComplaint.referenceId,
+                        fromStatus: 'In Progress' as any,
+                        toStatus: 'Pending Approval' as any,
+                        changedBy: selectedComplaint.pendingApprovalBy || 'Worker Crew',
+                        changedByRole: 'worker' as any,
+                        note: selectedComplaint.completionNotes || 'Work finished with photo proof. Submitted for Admin verification.',
+                        timestamp: selectedComplaint.pendingApprovalAt
+                      }
+                    ]
+                  : []),
+                ...(selectedComplaint.resolvedAt
+                  ? [
+                      {
+                        id: 'h4',
+                        complaintId: selectedComplaint.id,
+                        referenceId: selectedComplaint.referenceId,
+                        fromStatus: 'Pending Approval' as any,
+                        toStatus: 'Resolved' as any,
+                        changedBy: selectedComplaint.resolvedBy || 'Admin Director',
+                        changedByRole: 'admin' as any,
+                        note: 'Issue verified by Admin and resolved successfully',
+                        timestamp: selectedComplaint.resolvedAt
+                      }
+                    ]
+                  : [])
+              ]}
+              createdAt={selectedComplaint.createdAt}
+            />
+
+            {selectedComplaint.status === 'Resolved' && (
+              <div className="mt-6 pt-4 border-t border-slate-100 flex justify-end">
                 <button
                   onClick={() => setSelectedComplaint(null)}
                   className="px-4 py-1.5 bg-slate-100 text-slate-700 font-semibold text-xs rounded-xl hover:bg-slate-200"

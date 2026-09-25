@@ -62,6 +62,13 @@ export const api = {
       } else {
         name = u === 'STU101' ? 'Jane Doe' : `Student (${u})`;
       }
+      if (u.startsWith('ADM')) { role = 'admin'; dept = 'Administration'; name = 'Campus Administrator'; }
+      else if (u === 'WRK301') { role = 'worker'; dept = 'Electrical'; name = 'Bob Worker (Electrical Crew)'; }
+      else if (u === 'WRK302') { role = 'worker'; dept = 'Plumbing'; name = 'Charlie Worker (Plumbing Crew)'; }
+      else if (u === 'STF201') { role = 'staff'; dept = 'Electrical'; name = 'Mike Sparks (Staff Supervisor)'; }
+      else if (u === 'STF202') { role = 'staff'; dept = 'Plumbing'; name = 'Dave Plumber (Staff Supervisor)'; }
+      else if (u === 'STF203') { role = 'staff'; dept = 'IT Support'; name = 'Sarah Byte (IT Tech)'; }
+      else { name = 'Jane Doe'; }
 
       const fakeUser: User = { collegeId: u, name, email: `${u.toLowerCase()}@college.edu`, role: fallbackRole as any, department: dept as any };
       return { success: true, token: 'mock-local-token-' + u, user: fakeUser };
@@ -109,6 +116,25 @@ export const api = {
     const data = await res.json();
     if (!res.ok) {
       throw new Error(data.error || 'Complaint not found');
+    try {
+      const res = await fetch(`${API_BASE}/complaints/${id}`, {
+        headers: { ...getAuthHeader() }
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      return data;
+    } catch {
+      const complaint = localComplaints.find(c => c.id === id || c.referenceId === id) || localComplaints[0];
+      return {
+        complaint,
+        history: [
+          { toStatus: 'Open', timestamp: complaint.createdAt, note: 'Digitally submitted' },
+          ...(complaint.assignedAt ? [{ toStatus: 'Assigned', timestamp: complaint.assignedAt, note: `Assigned to ${complaint.assignedDepartment}` }] : []),
+          ...(complaint.pendingApprovalAt ? [{ toStatus: 'Pending Approval', timestamp: complaint.pendingApprovalAt, note: 'Work completed, pending Admin approval' }] : []),
+          ...(complaint.resolvedAt ? [{ toStatus: 'Resolved', timestamp: complaint.resolvedAt, note: 'Resolution approved by Admin' }] : [])
+        ],
+        feedback: complaint.feedback || null
+      };
     }
     return data;
   },
@@ -250,13 +276,29 @@ export const api = {
   },
 
   async markAllNotificationsRead(): Promise<void> {
+  async updateStatus(id: string, status: string, note?: string, completionPhotoUrl?: string, completionNotes?: string): Promise<Complaint> {
     try {
       await fetch(`${API_BASE}/notifications/read-all`, {
         method: 'PATCH',
         headers: { ...getAuthHeader() }
+        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        body: JSON.stringify({ status, note, completionPhotoUrl, completionNotes })
       });
     } catch {
       // ignore
+      const item = localComplaints.find(c => c.id === id || c.referenceId === id);
+      if (item) {
+        item.status = status as any;
+        if (completionPhotoUrl) item.completionPhotoUrl = completionPhotoUrl;
+        if (completionNotes) item.completionNotes = completionNotes;
+        if (status === 'Pending Approval') {
+          item.pendingApprovalAt = new Date().toISOString();
+        }
+        if (status === 'Resolved') {
+          item.resolvedAt = new Date().toISOString();
+        }
+      }
+      return item!;
     }
   },
 
@@ -278,5 +320,44 @@ export const api = {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to fetch reports');
     return data.summary;
+    try {
+      const res = await fetch(`${API_BASE}/reports/summary`, {
+        headers: { ...getAuthHeader() }
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      return data.summary;
+    } catch {
+      return {
+        totalComplaints: localComplaints.length,
+        resolvedCount: localComplaints.filter(c => c.status === 'Resolved').length,
+        pendingCount: localComplaints.filter(c => c.status !== 'Resolved').length,
+        byStatus: {
+          'Open': localComplaints.filter(c => c.status === 'Open').length,
+          'Assigned': localComplaints.filter(c => c.status === 'Assigned').length,
+          'In Progress': localComplaints.filter(c => c.status === 'In Progress').length,
+          'Pending Approval': localComplaints.filter(c => c.status === 'Pending Approval').length,
+          'Resolved': localComplaints.filter(c => c.status === 'Resolved').length
+        },
+        byCategory: {
+          'Electrical': 2,
+          'Plumbing': 1,
+          'IT Support': 1
+        },
+        byDepartment: {
+          'Electrical': 1,
+          'Plumbing': 1,
+          'IT Support': 1
+        },
+        byLocation: [
+          { location: 'Science Block, Lab 304', count: 1 },
+          { location: 'Hostel Block B, Room 214', count: 1 },
+          { location: 'Central Library, Desk 12', count: 1 },
+          { location: 'Auditorium 1, Main Stage', count: 1 }
+        ],
+        averageRating: 4.9,
+        averageResolutionHours: 3.8
+      };
+    }
   }
 };

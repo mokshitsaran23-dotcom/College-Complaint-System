@@ -101,6 +101,10 @@ async function getComplaints(req, res) {
     } else {
       // Supervisor view: show complaints in staff department + complaints submitted by staff
       results = results.filter(c => c.assignedDepartment === user.department || c.submitter?.collegeId === user.collegeId);
+    results = results.filter(c => c.submitter.collegeId === user.collegeId);
+  } else if (user.role === 'staff' || user.role === 'worker') {
+    if (user.department) {
+      results = results.filter(c => c.assignedDepartment === user.department);
     }
   }
 

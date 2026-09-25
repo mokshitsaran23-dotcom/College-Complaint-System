@@ -30,6 +30,10 @@ export const App: React.FC = () => {
     } else if (user.role === 'worker') {
       setActiveTab('worker_queue');
     }
+    if (user.role === 'student') setActiveTab('my_complaints');
+    else if (user.role === 'admin') setActiveTab('queue');
+    else if (user.role === 'staff') setActiveTab('staff_queue');
+    else if (user.role === 'worker') setActiveTab('worker_queue');
   }, [user?.role]);
 
   // Load complaints, notifications, and reports
@@ -208,6 +212,14 @@ export const App: React.FC = () => {
             )}
 
             {/* Worker Field Maintenance Dashboard */}
+            {user.role === 'worker' && (
+              <WorkerDashboard
+                user={user}
+                complaints={complaints}
+                onComplaintUpdated={handleComplaintUpdated}
+              />
+            )}
+
             {user.role === 'worker' && (
               <WorkerDashboard
                 user={user}

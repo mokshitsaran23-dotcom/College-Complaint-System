@@ -25,6 +25,8 @@ export const Timeline: React.FC<TimelineProps> = ({ currentStatus, history, crea
   if (normStatus === 'PENDING_APPROVAL') currentIndex = 4;
   if (normStatus === 'ADMIN_REVIEW') currentIndex = 4;
   if (isRework) currentIndex = 3; // Rework sits between in-progress and completed
+  const stages: ComplaintStatus[] = ['Open', 'Assigned', 'In Progress', 'Pending Approval', 'Resolved'];
+  const currentIndex = stages.indexOf(currentStatus);
 
   return (
     <div className="space-y-6">

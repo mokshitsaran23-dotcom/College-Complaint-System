@@ -22,6 +22,7 @@ async function getSummaryReport(req, res) {
     'REWORK_REQUIRED': 0,
     'RESOLVED': 0
   };
+  const byStatus = { 'Open': 0, 'Assigned': 0, 'In Progress': 0, 'Pending Approval': 0, 'Resolved': 0 };
   const byDepartment = {};
   const locationCounts = {};
 
