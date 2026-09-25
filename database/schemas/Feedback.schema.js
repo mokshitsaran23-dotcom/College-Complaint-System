@@ -2,19 +2,36 @@ const mongoose = require('mongoose');
 
 const FeedbackSchema = new mongoose.Schema({
   complaintId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Complaint',
+    type: mongoose.Schema.Types.Mixed,
     required: true,
-    unique: true,
     index: true
   },
   referenceId: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
   submitterCollegeId: {
     type: String,
-    required: true
+    required: true,
+    index: true
+  },
+  submitterName: {
+    type: String,
+    default: ''
+  },
+  workerCollegeId: {
+    type: String,
+    default: null,
+    index: true
+  },
+  workerName: {
+    type: String,
+    default: null
+  },
+  department: {
+    type: String,
+    default: null
   },
   rating: {
     type: Number,
@@ -32,6 +49,8 @@ const FeedbackSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+}, {
+  timestamps: true
 });
 
 module.exports = FeedbackSchema;

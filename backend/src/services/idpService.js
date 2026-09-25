@@ -69,6 +69,42 @@ const demoCollegeDirectory = [
     avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150'
   },
   {
+    collegeId: 'WRK303',
+    password: 'worker123',
+    name: 'David Worker (Facilities Crew)',
+    email: 'david.worker@college.edu',
+    role: 'worker',
+    department: 'Facilities',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150'
+  },
+  {
+    collegeId: 'WRK304',
+    password: 'worker123',
+    name: 'Alex Tech (IT Support Crew)',
+    email: 'alex.tech@college.edu',
+    role: 'worker',
+    department: 'IT Support',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
+  },
+  {
+    collegeId: 'WRK305',
+    password: 'worker123',
+    name: 'Edward Carpenter (Carpentry Crew)',
+    email: 'edward.carpenter@college.edu',
+    role: 'worker',
+    department: 'Carpentry',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150'
+  },
+  {
+    collegeId: 'WRK306',
+    password: 'worker123',
+    name: 'Sam Cleaner (Sanitation Crew)',
+    email: 'sam.cleaner@college.edu',
+    role: 'worker',
+    department: 'Sanitation',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150'
+  },
+  {
     collegeId: 'STF203',
     password: 'staff123',
     name: 'Sarah Byte (Network Tech)',

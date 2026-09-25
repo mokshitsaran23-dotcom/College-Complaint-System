@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "referenceId": "CMP-01",
+    "category": "Electrical",
+    "assignedDepartment": "Electrical",
+    "status": "Assigned"
+  },
+  {
+    "id": "2",
+    "referenceId": "CMP-02",
+    "category": "Plumbing",
+    "assignedDepartment": "Plumbing",
+    "status": "Assigned"
+  },
+  {
+    "id": "3",
+    "referenceId": "CMP-03",
+    "category": "Electrical",
+    "assignedDepartment": "Electrical",
+    "status": "In Progress"
+  },
+  {
+    "id": "4",
+    "referenceId": "CMP-04",
+    "category": "IT Support",
+    "assignedDepartment": "IT Support",
+    "status": "Assigned"
+  }
+]

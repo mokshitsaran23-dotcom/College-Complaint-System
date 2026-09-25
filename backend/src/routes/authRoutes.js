@@ -1,10 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const { login, getMe, getDemoUsers } = require('../controllers/authController');
+const {
+  login,
+  registerUnified,
+  registerStudent,
+  registerStaff,
+  registerWorker,
+  getMe
+} = require('../controllers/authController');
 const { authenticate } = require('../middleware/auth');
 
+// Authentication endpoints
 router.post('/login', login);
+router.post('/register', registerUnified);
+router.post('/register/student', registerStudent);
+router.post('/register/staff', registerStaff);
+router.post('/register/worker', registerWorker);
 router.get('/me', authenticate, getMe);
-router.get('/demo-users', getDemoUsers);
 
 module.exports = router;

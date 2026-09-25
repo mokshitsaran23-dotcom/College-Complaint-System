@@ -39,6 +39,13 @@ const StatusHistorySchema = new mongoose.Schema({
 
   changedByRole: {
     type: String,
+    enum: ['student', 'staff', 'worker', 'admin'],
+    required: true
+  },
+  action: {
+    type: String,
+    default: ''
+  },
     enum: ['student', 'staff', 'admin'],
     required: true,
     immutable: true
@@ -48,6 +55,14 @@ const StatusHistorySchema = new mongoose.Schema({
     type: String,
     default: '',
     immutable: true
+  },
+  proofPhotoUrl: {
+    type: String,
+    default: null
+  },
+  reworkReason: {
+    type: String,
+    default: null
   },
 
   timestamp: {
